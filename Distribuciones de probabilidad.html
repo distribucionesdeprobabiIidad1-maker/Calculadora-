@@ -225,7 +225,6 @@
       <span class="tag">● MODO EXAMEN</span>
       <span class="timer" id="examTimer">00:00</span>
     </div>
-    <div class="exam-alerts" id="examAlerts">Registro de salidas desactivado</div>
     <div class="exam-body" id="examBody"></div>
   </div>
 </div>
@@ -868,10 +867,7 @@ function loadExamSession(){
 function clearExamSession(){ try{ localStorage.removeItem(EXAM_KEY); }catch(e){} }
 
 function updateAlertsUI(){
-  var el=document.getElementById('examAlerts');
-  if(!el) return;
-  el.textContent='Registro de salidas desactivado';
-  el.classList.remove('warn');
+  // El modo sin seguimiento no muestra un contador de salidas.
 }
 function logExit(reason){
   // Esta versión no registra cambios de pestaña ni salidas.
@@ -1007,7 +1003,7 @@ function endExam(){
   if(wrapEl) document.body.insertBefore(wrapEl, overlay);
   overlay.classList.remove('show');
   var totalMs=examState.startTime?(Date.now()-examState.startTime):0;
-  alert('Modo examen finalizado.\nDuración total: '+formatElapsed(totalMs)+'\nRegistro de salidas: desactivado');
+  alert('Modo examen finalizado.\nDuración total: '+formatElapsed(totalMs));
 }
 /* Seguimiento desactivado voluntariamente.
    No hay registro de visibilidad, foco, pantalla completa ni cierre de página. */
@@ -1025,3 +1021,4 @@ function endExam(){
 </script>
 </body>
 </html>
+
